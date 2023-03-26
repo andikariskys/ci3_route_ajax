@@ -54,3 +54,4 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['getmenu'] = 'mycon/ambil_data';
+$route['savemenu'] = 'mycon/simpan_data';

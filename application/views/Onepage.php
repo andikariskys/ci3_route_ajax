@@ -7,30 +7,54 @@
     <title>PHP Ajax</title>
     <link rel="stylesheet" href="<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>">
     <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
+    <script src="<?= base_url('assets/js/myscript.js') ?>"></script>
     <script>
         $(document).ready(function () {
-            $.ajax({
-                type: 'GET',
-                url: "<?= base_url('getmenu') ?>",
-                success: function (response) {
-                    $('#dataMenu').html(response);
-                }
-            })
-        })
+            loadData();
 
-        function changeTheme() {
-                var theme = document.getElementById('darkMode');
-
-                if (theme.checked == true) {
-                    $('#thisBody').attr("data-bs-theme", "dark");
-                    $('#myTable').removeClass("table-secondary");
-                    $('#myTable').addClass("table-dark");
-                } else {
-                    $('#thisBody').removeAttr("data-bs-theme");
-                    $('#myTable').removeClass("table-dark");
-                    $('#myTable').addClass("table-secondary");
-                }
+            function loadData() {
+                $.ajax({
+                    type: "GET",
+                    url: "<?= base_url('getmenu') ?>",
+                    success: function (response) {
+                        $("#dataMenu").html();
+                        $("#dataMenu").html(response);
+                    },
+                });
             }
+
+            $('#dataInput').submit(function (e) {
+                e.preventDefault();
+
+                // var id = $('#id_menu').val();
+                var menu_nama = $('#nama_menu').val();
+                var menu_jenis = $("input[name='jenis']:checked").val();
+                var menu_harga = $('#harga_menu').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "<?= base_url('savemenu') ?>", 
+                    data: {
+                        nama: menu_nama,
+                        jenis: menu_jenis,
+                        harga: menu_harga
+                    },
+                    success: function (response) {
+                        loadData();
+                        resetForm();
+                    }
+                })
+            })
+
+            function resetForm() {
+                $('#id_menu').val('');
+                $('#nama_menu').val('');
+                $('#makanan').prop('checked', false);
+                $('#minuman').prop('checked', false);
+                $('#snack').prop('checked', false);
+                $('#harga_menu').val('');
+            }
+        })
     </script>
 </head>
 <body id="thisBody">
@@ -46,7 +70,7 @@
             <form id="dataInput">
                 <input type="hidden" id="id_menu">
                 <tr>
-                    <th>Nama Buah</th>
+                    <th>Nama Menu</th>
                     <th>:</th>
                     <td><input type="text" id="nama_menu" class="form-control" required></td>
                 </tr>
@@ -54,11 +78,11 @@
                     <th>Jenis Menu</th>
                     <th>:</th>
                     <td>
-                        <input type="radio" name="jenis" id="makanan" class="form-check-input" required>
+                        <input type="radio" name="jenis" id="makanan" class="form-check-input" value="makanan" required>
                         <label for="makanan">Makanan</label>
-                        <input type="radio" name="jenis" id="minuman" class="form-check-input">
+                        <input type="radio" name="jenis" id="minuman" class="form-check-input" value="minuman">
                         <label for="minuman">Makanan</label>
-                        <input type="radio" name="jenis" id="snack" class="form-check-input">
+                        <input type="radio" name="jenis" id="snack" class="form-check-input" value="snack">
                         <label for="snack">Sanck</label>
                     </td>
                 </tr>
