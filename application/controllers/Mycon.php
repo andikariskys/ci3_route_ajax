@@ -33,6 +33,12 @@
 
             $this->mymod->save_data($data_menu);
         }
+
+        public function hapus_data()
+        {
+            $id = $this->input->post('id');
+            $this->mymod->delete_data($id);
+        }
     }
 
 ?>

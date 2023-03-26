@@ -13,6 +13,12 @@ use LDAP\Result;
         {
             $this->db->insert('daftar_menu', $data_menu);
         }
+
+        public function delete_data($id)
+        {
+            $this->db->where('id', $id);
+            $this->db->delete('daftar_menu');
+        }
     }
     
 

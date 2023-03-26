@@ -9,7 +9,6 @@
     <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/myscript.js') ?>"></script>
     <script>
-        $(document).ready(function () {
             loadData();
 
             function loadData() {
@@ -54,7 +53,19 @@
                 $('#snack').prop('checked', false);
                 $('#harga_menu').val('');
             }
-        })
+
+        function hapusData(id_menu) {
+            $.ajax({
+                type: 'POST',
+                url: "<?= base_url('deletemenu') ?>",
+                data: {
+                    id: id_menu
+                },
+                success: function (response) {
+                    loadData();
+                }
+            })
+        }
     </script>
 </head>
 <body id="thisBody">

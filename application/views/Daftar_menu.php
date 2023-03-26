@@ -6,6 +6,7 @@
             <th>Nama</th>
             <th>Jenis</th>
             <th>Harga</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
                 <td><?= $dm->nama ?></td>
                 <td><?= $dm->jenis ?></td>
                 <td>Rp. <?= $dm->harga ?></td>
+                <td><button class="btn btn-danger" onclick="hapusData('<?= $dm->id ?>')">Hapus</button></td>
             </tr>
 
         <?php endforeach; ?>

@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['getmenu'] = 'mycon/ambil_data';
 $route['savemenu'] = 'mycon/simpan_data';
+$route['deletemenu'] = 'mycon/hapus_data';
