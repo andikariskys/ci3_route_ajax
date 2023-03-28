@@ -8,65 +8,6 @@
     <link rel="stylesheet" href="<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>">
     <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/myscript.js') ?>"></script>
-    <script>
-            loadData();
-
-            function loadData() {
-                $.ajax({
-                    type: "GET",
-                    url: "<?= base_url('getmenu') ?>",
-                    success: function (response) {
-                        $("#dataMenu").html();
-                        $("#dataMenu").html(response);
-                    },
-                });
-            }
-
-            $('#dataInput').submit(function (e) {
-                e.preventDefault();
-
-                // var id = $('#id_menu').val();
-                var menu_nama = $('#nama_menu').val();
-                var menu_jenis = $("input[name='jenis']:checked").val();
-                var menu_harga = $('#harga_menu').val();
-
-                $.ajax({
-                    type: 'POST',
-                    url: "<?= base_url('savemenu') ?>", 
-                    data: {
-                        nama: menu_nama,
-                        jenis: menu_jenis,
-                        harga: menu_harga
-                    },
-                    success: function (response) {
-                        loadData();
-                        resetForm();
-                    }
-                })
-            })
-
-            function resetForm() {
-                $('#id_menu').val('');
-                $('#nama_menu').val('');
-                $('#makanan').prop('checked', false);
-                $('#minuman').prop('checked', false);
-                $('#snack').prop('checked', false);
-                $('#harga_menu').val('');
-            }
-
-        function hapusData(id_menu) {
-            $.ajax({
-                type: 'POST',
-                url: "<?= base_url('deletemenu') ?>",
-                data: {
-                    id: id_menu
-                },
-                success: function (response) {
-                    loadData();
-                }
-            })
-        }
-    </script>
 </head>
 <body id="thisBody">
     <div class="position-absolute top-0 end-0 m-3">
@@ -76,9 +17,8 @@
         </div>
     </div>
     <div class="container">
-        <center><p class="display-5 mt-3">Tambah Data</p></center>
+        <center><p class="display-5 mt-3" id="title_form">Tambah Data</p></center>
         <table class="m-2" style="width: 100%;">
-            <form id="dataInput">
                 <input type="hidden" id="id_menu">
                 <tr>
                     <th>Nama Menu</th>
@@ -92,7 +32,7 @@
                         <input type="radio" name="jenis" id="makanan" class="form-check-input" value="makanan" required>
                         <label for="makanan">Makanan</label>
                         <input type="radio" name="jenis" id="minuman" class="form-check-input" value="minuman">
-                        <label for="minuman">Makanan</label>
+                        <label for="minuman">Minuman</label>
                         <input type="radio" name="jenis" id="snack" class="form-check-input" value="snack">
                         <label for="snack">Sanck</label>
                     </td>
@@ -105,9 +45,12 @@
                 <tr>
                     <th></th>
                     <th></th>
-                    <td><button type="submit" class="btn btn-primary">Simpan Data</button></td>
+                    <td>
+                        <button type="submit" class="btn btn-primary" id="btn_simpan" onclick="simpanMenu()" >Simpan Data</button>
+                        <button type="submit" class="btn btn-success" id="btn_simpan_edit" onclick="simpanEditMenu()" hidden>Simpan Edit Data</button>
+                        <button class="btn btn-secondary" onclick="resetForm()" id="btn_reset" hidden>Batal</button>
+                    </td>
                 </tr>
-            </form>
         </table>
         <div id="dataMenu">
 

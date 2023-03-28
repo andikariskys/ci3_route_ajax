@@ -39,6 +39,31 @@
             $id = $this->input->post('id');
             $this->mymod->delete_data($id);
         }
+
+        public function ambil_data_id()
+        {
+            $id_menu = $this->input->post('id');
+            // var_dump($id_menu);
+            $data_menu = $this->mymod->get_data_id($id_menu);
+            // var_dump($data_menu);
+            echo json_encode($data_menu);
+        }
+
+        public function simpan_edit_data()
+        {
+            $id = $this->input->post('id');
+            $nama = $this->input->post('nama');
+            $jenis = $this->input->post('jenis');
+            $harga = $this->input->post('harga');
+
+            $data_menu = array(
+                'nama' => $nama,
+                'jenis' => $jenis,
+                'harga' => $harga
+            );
+
+            $this->mymod->save_update_data($data_menu, $id);
+        }
     }
 
 ?>

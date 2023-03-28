@@ -19,7 +19,10 @@
                 <td><?= $dm->nama ?></td>
                 <td><?= $dm->jenis ?></td>
                 <td>Rp. <?= $dm->harga ?></td>
-                <td><button class="btn btn-danger" onclick="hapusData('<?= $dm->id ?>')">Hapus</button></td>
+                <td>
+                    <button class="btn btn-warning" onclick="editData('<?= $dm->id ?>')">Ubah</button>
+                    <button class="btn btn-danger" onclick="hapusData('<?= $dm->id ?>')">Hapus</button>
+                </td>
             </tr>
 
         <?php endforeach; ?>

@@ -56,3 +56,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['getmenu'] = 'mycon/ambil_data';
 $route['savemenu'] = 'mycon/simpan_data';
 $route['deletemenu'] = 'mycon/hapus_data';
+$route['getmenuid'] = 'mycon/ambil_data_id';
+$route['saveeditmenu'] = 'mycon/simpan_edit_data';
